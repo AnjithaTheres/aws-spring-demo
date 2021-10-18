@@ -7,13 +7,13 @@ pipeline {
         stage('Clean') {
             steps {
                 echo 'Cleaning..'
-                bat 'mvn -B -DskipTests clean'
+                sh 'mvn -B -DskipTests clean'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                bat 'mvn test'
+                sh 'mvn test'
             }
              post {
                 always {
@@ -27,10 +27,10 @@ pipeline {
             }
             post {
                 success{
-                    bat 'echo "Packaging done"'
+                    sh 'echo "Packaging done"'
                 }
                 failure{
-                    bat 'echo "Packaging failure"'
+                    sh 'echo "Packaging failure"'
                 }
             }
         }
@@ -43,10 +43,10 @@ pipeline {
             }
             post {
                 success{
-                    bat 'echo "Uploaded to AWS"'
+                    sh 'echo "Uploaded to AWS"'
                 }
                 failure{
-                    bat 'echo "failure"'
+                    sh 'echo "failure"'
                 }
             }
         
