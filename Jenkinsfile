@@ -34,21 +34,26 @@ pipeline {
                 }
             }
         }
+      stage('Slack') {
+            steps {
+               slackSendMessage : "text message"
+            }
+      }
 
-        stage("Deploy to AWS"){
-            steps{
-                 withAWS(credentials:'puneetawscred', region:'us-east-1') {
-                     s3Upload(workingDir:'deploy', includePathPattern:'**/*.war', bucket:'my-jenkinsangular1', path:'')
-            }
-            }
-            post {
-                success{
-                    sh 'echo "Uploaded to AWS"'
-                }
-                failure{
-                    sh 'echo "failure"'
-                }
-            }
+//         stage("Deploy to AWS"){
+//             steps{
+//                  withAWS(credentials:'puneetawscred', region:'us-east-1') {
+//                      s3Upload(workingDir:'deploy', includePathPattern:'**/*.war', bucket:'my-jenkinsangular1', path:'')
+//             }
+//             }
+//             post {
+//                 success{
+//                     sh 'echo "Uploaded to AWS"'
+//                 }
+//                 failure{
+//                     sh 'echo "failure"'
+//                 }
+//             }
         
         }
     }
